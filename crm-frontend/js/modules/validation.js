@@ -1,4 +1,4 @@
-import { BASE_URL } from "../main";
+import { BASE_URL } from "../main.js";
 
 export function surnameValidate(input) {
     const inputValue = input.value;
