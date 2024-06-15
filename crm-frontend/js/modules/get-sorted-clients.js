@@ -1,5 +1,7 @@
+import { BASE_URL } from "../main";
+
 export default async function getSortedClients(property, direction) { // функция сортировки клиентов
-    const response = await fetch('http://localhost:3000/api/clients');
+    const response = await fetch(BASE_URL + '/api/clients');
     let clients = await response.json();
 
     return clients.sort(function(clientA, clientsB) {

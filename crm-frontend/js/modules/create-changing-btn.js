@@ -2,6 +2,7 @@ import { modalOverlay } from '../main.js';
 import createContacts from './create-contacts-for-change.js';
 import getContacts from './push-contacts.js';
 import {surnameValidate, nameValidate, lastnameValidate, validation, checkingRepeatsChange, validatorError} from './validation.js';
+import { BASE_URL } from '../main.js';
 
 export default function createChangeBtn(client) { // функция создания кнопки изменения клиента
     const $changeBtn = document.createElement('button'),
@@ -17,7 +18,7 @@ export default function createChangeBtn(client) { // функция создан
     $changeBtn.addEventListener('click', async function(e) {
         e.preventDefault();
 
-        const response = await fetch(`http://localhost:3000/api/clients/${client.id}`);
+        const response = await fetch(BASE_URL + `/api/clients/${client.id}`);
 
         $changeBtn.dataset.id = client.id;
 
@@ -50,7 +51,7 @@ export default function createChangeBtn(client) { // функция создан
     deleteClient.addEventListener('click', async function(m) {
         m.preventDefault();
 
-        const response = await fetch(`http://localhost:3000/api/clients/${$changeBtn.dataset.id}`, {
+        const response = await fetch(BASE_URL + `/api/clients/${$changeBtn.dataset.id}`, {
             method: 'DELETE',
         })
     })
@@ -95,7 +96,7 @@ export default function createChangeBtn(client) { // функция создан
             let resultOfChecking = await checkingRepeatsChange(surname, name, lastName, client.id);
 
             if (!resultOfChecking) {
-                const response = await fetch(`http://localhost:3000/api/clients/${$changeBtn.dataset.id}`, {
+                const response = await fetch(BASE_URL + `/api/clients/${$changeBtn.dataset.id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -111,7 +112,7 @@ export default function createChangeBtn(client) { // функция создан
         } else if (resultValidator && resultLastName === '') {
             let resultOfChecking = await checkingRepeatsChange(surname, name, client.id);
 
-            const response = await fetch(`http://localhost:3000/api/clients/${$changeBtn.dataset.id}`, {
+            const response = await fetch(BASE_URL + `/api/clients/${$changeBtn.dataset.id}`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({

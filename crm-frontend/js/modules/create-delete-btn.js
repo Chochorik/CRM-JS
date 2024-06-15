@@ -1,4 +1,4 @@
-import { modalOverlay } from '../main.js';
+import { modalOverlay, BASE_URL } from '../main.js';
 
 export default function createDeleteBtn(client) { // функция создания кнопки удаления клиента
   const $deleteBtn = document.createElement('button'),
@@ -22,7 +22,7 @@ export default function createDeleteBtn(client) { // функция создан
       $modalDeleteConfirm.addEventListener('click', async function(n) {
           n.preventDefault();
 
-          const response = await fetch(`http://localhost:3000/api/clients/${$deleteBtn.dataset.id}`, {
+          const response = await fetch(BASE_URL + `/api/clients/${$deleteBtn.dataset.id}`, {
               method: 'DELETE',
           })
 

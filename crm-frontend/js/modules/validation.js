@@ -1,3 +1,5 @@
+import { BASE_URL } from "../main";
+
 export function surnameValidate(input) {
     const inputValue = input.value;
     let trimedValue = String(inputValue.replaceAll(/\s/g,'').toLowerCase());
@@ -51,7 +53,7 @@ export function validation(surname, name, lastname) {
 }
 
 export async function checkingRepeats(surname, name, lastname = '') {
-    const response = await fetch('http://localhost:3000/api/clients');
+    const response = await fetch(BASE_URL + '/api/clients');
     const data = await response.json();
 
     for (const client of data) {
@@ -62,10 +64,10 @@ export async function checkingRepeats(surname, name, lastname = '') {
 }
 
 export async function checkingRepeatsChange(surname, name, lastname = '', id) {
-    const response = await fetch('http://localhost:3000/api/clients');
+    const response = await fetch(BASE_URL + '/api/clients');
     const data = await response.json();
 
-    const responseClient = await fetch(`http://localhost:3000/api/clients/${id}`);
+    const responseClient = await fetch(BASE_URL + `/api/clients/${id}`);
     const clientData = await responseClient.json();
 
     if (clientData.surname === surname && clientData.name === name && clientData.lastName === lastname) {

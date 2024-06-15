@@ -9,6 +9,7 @@ import {surnameValidate, nameValidate, lastnameValidate, validation, checkingRep
 // экспорт необходимых констант для импортируемых функций
 export const modalOverlay = document.getElementById('overlay-modal');
 export const $addContactBtn = document.querySelector('.modal-add__add-field');
+export const BASE_URL = 'https://crm-js.onrender.com';
 
 // главная функция
 (() => {
@@ -259,7 +260,7 @@ export const $addContactBtn = document.querySelector('.modal-add__add-field');
     // прорисовка таблицы
     async function renderingTable() {
         // запрос на сервер для получения всех клиентов
-        const response = await fetch('http://localhost:3000/api/clients');
+        const response = await fetch(BASE_URL + '/api/clients');
         let clients = await response.json();
 
         let clientsList = document.getElementById('table__body'); // тело таблицы
@@ -289,10 +290,10 @@ export const $addContactBtn = document.querySelector('.modal-add__add-field');
             } else {
                 clientsList.innerHTML = '';
                 // получаем query параметр search для поиска
-                const params = new URL(`http://localhost:3000/api/clients?search=${searchInput.value}`);
+                const params = new URL(BASE_URL + `/api/clients?search=${searchInput.value}`);
                 const searchParam = params.searchParams.get('search');
                 // передаем get запрос параметра search на сервер
-                const response = await fetch(`http://localhost:3000/api/clients?search=${searchParam}`, {
+                const response = await fetch(BASE_URL + `/api/clients?search=${searchParam}`, {
                     method: 'GET',
                 });
                 const data = await response.json();
@@ -411,7 +412,7 @@ export const $addContactBtn = document.querySelector('.modal-add__add-field');
         if (resultValidator && resultLastname !== '') {
             let resultOfChecking = await checkingRepeats(surname, name, lastName);
             if (!resultOfChecking) {
-                const response = await fetch('http://localhost:3000/api/clients', {
+                const response = await fetch(BASE_URL + '/api/clients', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -427,7 +428,7 @@ export const $addContactBtn = document.querySelector('.modal-add__add-field');
         } else if (resultValidator && resultLastname === '') {
           let resultOfChecking = await checkingRepeats(surname, name);
           if (!resultOfChecking) {
-                const response = await fetch('http://localhost:3000/api/clients', {
+                const response = await fetch(BASE_URL + '/api/clients', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
