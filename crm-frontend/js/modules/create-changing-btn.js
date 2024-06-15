@@ -1,8 +1,7 @@
-import { modalOverlay } from '../main.js';
+import { modalOverlay, BASE_URL } from '../main.js';
 import createContacts from './create-contacts-for-change.js';
 import getContacts from './push-contacts.js';
 import {surnameValidate, nameValidate, lastnameValidate, validation, checkingRepeatsChange, validatorError} from './validation.js';
-import { BASE_URL } from '../main.js';
 
 export default function createChangeBtn(client) { // функция создания кнопки изменения клиента
     const $changeBtn = document.createElement('button'),
