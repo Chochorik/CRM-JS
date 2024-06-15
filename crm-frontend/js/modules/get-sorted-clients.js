@@ -1,4 +1,4 @@
-import { BASE_URL } from "../main";
+import { BASE_URL } from "../main.js";
 
 export default async function getSortedClients(property, direction) { // функция сортировки клиентов
     const response = await fetch(BASE_URL + '/api/clients');
